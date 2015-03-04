@@ -26,10 +26,49 @@ cr.plugins_.ATPAds = function(runtime) {
         var self;
         
         instanceProto.onCreate = function() {
-                this.adService = this.properties[0];
-                this.bannerAdunit = this.properties[1];
-                this.interstitialAdunit = this.properties[2];
-                this.banner = Cocoon.Ad.createBanner(this.bannerAdunit);
+
+                this.androidBannerId = this.properties[0;]
+                
+                switch (this.properties[1]) {
+                    case 0:     this.androidBannerSize = "SMART"; break;
+                    case 1:     this.androidBannerSize = "BANNER"; break;
+                    case 2:     this.androidBannerSize = "MEDIUM_REC"; break;
+                    case 3:     this.androidBannerSize = "LEADERBOARD"; break;
+                }
+                    
+                this.androidInterstitialId = this.properties[2];
+                
+                this.iosBannerId = this.properties[3];
+
+                switch (this.properties[4]) {
+                    case 0:     this.iosBannerSize = "SMART"; break;
+                    case 1:     this.iosBannerSize = "BANNER"; break;
+                    case 2:     this.iosBannerSize = "MEDIUM_REC"; break;
+                    case 3:     this.iosBannerSize = "LEADERBOARD"; break;
+                }
+
+                this.iosInterstitialId = this.properties[5];
+                
+                if (this.runtime.isAndroid)
+                {
+                    this.bannerAdunit = this.androidBannerId;
+                    this.bannerSize = this.androidBannerSize;
+                    this.interstitialAdunit = this.androidInterstitialId;
+                }
+                else if (this.runtime.isiOS)
+                {
+                    this.bannerAdunit = this.iosBannerId;
+                    this.bannerSize = this.iosBannerSize;
+                    this.interstitialAdunit = this.iosInterstitialId;
+                }
+                else
+                {
+                    // unsupported platform
+                    this.bannerAdunit = "";
+                    this.interstitialAdunit = "";
+                }
+
+                this.banner = Cocoon.Ad.createBanner(this.bannerAdunit, );
                 this.interstitial = Cocoon.Ad.creaInterstitial(this.interstitialAdunit);
 
                 this.banner.on("show", function() {
@@ -113,64 +152,29 @@ cr.plugins_.ATPAds = function(runtime) {
          */
         function Acts() {};
 
-        /**
-        // Not available. 
-        Acts.prototype.CreateBannerDefault = function() {
-
-        };
-
-        Acts.prototype.CreateBannerSize = function(size) {
-
-        };
-
-        Acts.prototype.CreateBannerAdUnit = function(adunit) {
-
-        };        
-
-        Acts.prototype.CreateBannerFull = function(adunit,size) {
-
-        };
-
-        Acts.prototype.CreateInterstitialDefault = function(adunit) {
-
-        };
-
-        Acts.prototype.CreateInterstitialAdUnit = function(adunit) {
-
-        }; 
-        */
 
         Acts.prototype.ShowBanner = function() {
-            banner.show();
+            this.banner.show();
         };
         Acts.prototype.HideBanner = function() {
-            banner.hide();
+            this.banner.hide();
         };        
         Acts.prototype.LoadBanner = function() {
-            banner.load();
+            this.banner.load();
         };
         Acts.prototype.SetLayout = function(layout) {
-            banner.setPosition(layout);
+            this.banner.setPosition(layout);
         };
         Acts.prototype.SetPosition = function(x,y) {
-            banner.setPosition(x,y);
+            this.banner.setPosition(x,y);
         };
         Acts.prototype.ShowInterstitial = function() {
-            intesrtitial.show(); 
+            this.intesrtitial.show(); 
         };
         Acts.prototype.LoadInterstitial = function() {
-            interstitial.load();
+            this.interstitial.load();
         };
 
-        /**
-        // Not available. 
-        Acts.prototype.ReleaseInterstitial = function(anInterstitial) {
-            Cocoon.Ad.releaseInterstitial(anInterstitial);
-        };
-        Acts.prototype.ReleaseBanner = function(aBanner) {
-            Cocoon.Ad.releaseBanner(aBanner);
-        };
-        */
         pluginProto.acts = new Acts();
 
 }());

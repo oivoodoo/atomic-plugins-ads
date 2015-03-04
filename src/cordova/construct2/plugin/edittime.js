@@ -116,22 +116,15 @@ ACESDone();
 /**
  * Plugin properties
  */
+
 var property_list = [
-    new cr.Property(ept_combo,
-        "Ads Service",
-        "Admob",
-        "The name of the ads service you want to use (Mopub or Admob)",
-        "Admob|Mopub"),
-    new cr.Property(ept_text,
-        "Banner AdUnit",
-        "",
-        "The AdUnit for your banner ads",
-        ""),
-    new cr.Property(ept_text,
-        "Insterstitial AdUnit",
-        "",
-        "The AdUnit for your interstitials",
-        "")
+    new cr.Property(ept_section, "Android", "", "Ad unit IDs for Android."),
+    new cr.Property(ept_text,   "Banner ID (Android)",      "",         "Ad unit ID from admob or mopub for the banner ad."),
+    new cr.Property(ept_text,   "Interstitial ID (Android)", "",        "Ad unit ID from admob or mopub for the interstitials."),
+    
+    new cr.Property(ept_section, "iOS", "", "Ad unit IDs for iOS."),
+    new cr.Property(ept_text,   "Banner ID (iOS)",          "",         "Ad unit ID admob or mopub for the banner ad."),
+    new cr.Property(ept_text,   "Interstitial ID (iOS)",    "",         "Ad unit ID admob or mopub for the interstitials.")
 ];
 
 // Called by IDE when a new object type is to be created
