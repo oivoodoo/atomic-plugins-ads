@@ -18,7 +18,7 @@ function GetPluginSettings() {
  */
 
 // Banners
-AddCondition(0, cf_trigger, "On banner shown", "Banners", "On banner shown", "Triggered when a banner is shown.", "OnBannerShown");
+AddCondition(0, cf_trigger, "On banner shown", "Banners", "On banner shown", "Triggered when a banner is shown.", "onBannerShown");
 
 AddCondition(1, cf_trigger, "On banner hidden", "Banners", "On banner hidden", "Triggered when a banner is hidden.", "onBannerHidden");
 
@@ -31,7 +31,7 @@ AddCondition(4, cf_trigger, "On banner failed", "Banners", "On banner failed", "
 AddCondition(5, cf_trigger, "On banner dismissed", "Banners", "On banner dismissed", "Triggered when a new banner is collapsed after showing its modal content.", "onBannerDismissed");
 
 // Interstitials
-AddCondition(6, cf_trigger, "On interstitial shown", "Interstitials", "On interstitial shown", "Triggered when an interstitial is shown.", "OnInterstitialShown");
+AddCondition(6, cf_trigger, "On interstitial shown", "Interstitials", "On interstitial shown", "Triggered when an interstitial is shown.", "onInterstitialShown");
 
 AddCondition(7, cf_trigger, "On interstitial clicked", "Interstitials", "On interstitial clicked", "Triggered when an interstitial is clicked.", "onInterstitialClicked");
 

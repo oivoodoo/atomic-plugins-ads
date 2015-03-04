@@ -27,7 +27,7 @@ cr.plugins_.ATPAds = function(runtime) {
         
         instanceProto.onCreate = function() {
 
-                this.androidBannerId = this.properties[0;]
+                this.androidBannerId = this.properties[0];
                 
                 switch (this.properties[1]) {
                     case 0:     this.androidBannerSize = "SMART"; break;
@@ -68,7 +68,7 @@ cr.plugins_.ATPAds = function(runtime) {
                     this.interstitialAdunit = "";
                 }
 
-                this.banner = Cocoon.Ad.createBanner(this.bannerAdunit, );
+                this.banner = Cocoon.Ad.createBanner(this.bannerAdunit, this.bannerSize);
                 this.interstitial = Cocoon.Ad.creaInterstitial(this.interstitialAdunit);
 
                 this.banner.on("show", function() {
@@ -112,37 +112,37 @@ cr.plugins_.ATPAds = function(runtime) {
         };
 
         function Cnds() {};
-        Cnds.prototype.OnBannerShown = function() {
+        Cnds.prototype.onBannerShown = function() {
             return true;
         };
-        Cnds.prototype.OnBannerHidden = function() {
+        Cnds.prototype.onBannerHidden = function() {
             return true;
         };
-        Cnds.prototype.OnBannerLoaded = function() {
+        Cnds.prototype.onBannerLoaded = function() {
             return true;
         };
-        Cnds.prototype.OnBannerClicked = function() {
+        Cnds.prototype.onBannerClicked = function() {
             return true;
         };
-        Cnds.prototype.OnBannerFailed = function() {
+        Cnds.prototype.onBannerFailed = function() {
              return true;
         };                
-        Cnds.prototype.OnBannerDismissed = function() {
+        Cnds.prototype.onBannerDismissed = function() {
             return true;
         };
-        Cnds.prototype.OnInterstitialShown = function() {
+        Cnds.prototype.onInterstitialShown = function() {
             return true;
         };
-        Cnds.prototype.OnInterstitialLoaded = function() {
+        Cnds.prototype.onInterstitialLoaded = function() {
             return true;
         };
-        Cnds.prototype.OnInterstitialClicked = function() {
+        Cnds.prototype.onInterstitialClicked = function() {
             return true;
         };
-        Cnds.prototype.OnInterstitialFailed = function() {
+        Cnds.prototype.onInterstitialFailed = function() {
              return true;
         };           
-        Cnds.prototype.OnInterstitialDismissed = function() {
+        Cnds.prototype.onInterstitialDismissed = function() {
             return true;
         }
 
@@ -169,7 +169,7 @@ cr.plugins_.ATPAds = function(runtime) {
             this.banner.setPosition(x,y);
         };
         Acts.prototype.ShowInterstitial = function() {
-            this.intesrtitial.show(); 
+            this.interstitial.show(); 
         };
         Acts.prototype.LoadInterstitial = function() {
             this.interstitial.load();
