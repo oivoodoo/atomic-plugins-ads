@@ -166,7 +166,7 @@ cr.plugins_.ATPAds = function(runtime) {
             this.banner.load();
         };
         Acts.prototype.SetLayout = function(layout) {
-            this.banner.setPosition(layout);
+            this.banner.setLayout(layout);
         };
         Acts.prototype.SetPosition = function(x,y) {
             this.banner.setPosition(x,y);
