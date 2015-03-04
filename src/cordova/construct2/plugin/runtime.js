@@ -75,42 +75,44 @@ cr.plugins_.ATPAds = function(runtime) {
                 self = this;
                 
                 this.banner.on("show", function() {
-                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.OnBannerShown, self);
+                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onBannerShown, self);
                 });
 
                 this.banner.on("load", function() {
-                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.OnBannerLoaded, self);
+                    console.log("loaded");
+                    self.banner.show();
+                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onBannerLoaded, self);
                 });
 
                 this.banner.on("hide", function() {
-                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.OnBannerHidden, self);
+                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onBannerHidden, self);
                 });
 
                 this.banner.on("click", function() {
-                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.OnBannerClicked, self);
+                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onBannerClicked, self);
                 });
 
                 this.banner.on("fail", function() {
-                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.OnBannerFailed, self);
+                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onBannerFailed, self);
                 });
 
                 this.banner.on("dismiss", function() {
-                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.OnBannerDismissed, self);
+                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onBannerDismissed, self);
                 });
 
                 this.interstitial.on("show", function() {
-                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.OnInterstitialShown, self);
+                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onInterstitialShown, self);
                 });
                 this.interstitial.on("load", function() {
-                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.OnInterstitialLoaded, self);
+                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onInterstitialLoaded, self);
                 });
 
                 this.interstitial.on("click", function() {
-                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.OnInterstitialClicked, self);
+                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onInterstitialClicked, self);
                 });
 
                 this.interstitial.on("dismiss", function() {
-                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.OnInterstitialDismissed, self);
+                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onInterstitialDismissed, self);
                 });
         };
 
