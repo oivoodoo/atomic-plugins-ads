@@ -27,7 +27,7 @@ cr.plugins_.ATPAds = function(runtime) {
         
         instanceProto.onCreate = function() {
 
-                this.androidBannerId = this.properties[0;]
+                this.androidBannerId = this.properties[0];
                 
                 switch (this.properties[1]) {
                     case 0:     this.androidBannerSize = "SMART"; break;
@@ -68,9 +68,11 @@ cr.plugins_.ATPAds = function(runtime) {
                     this.interstitialAdunit = "";
                 }
 
-                this.banner = Cocoon.Ad.createBanner(this.bannerAdunit, );
-                this.interstitial = Cocoon.Ad.creaInterstitial(this.interstitialAdunit);
+                this.banner = Cocoon.Ad.createBanner(this.bannerAdunit, this.bannerSize);
+                this.interstitial = Cocoon.Ad.createInterstitial(this.interstitialAdunit);
 
+                self = this;
+                
                 this.banner.on("show", function() {
                     self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.OnBannerShown, self);
                 });
