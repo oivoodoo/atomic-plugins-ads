@@ -155,27 +155,26 @@ cr.plugins_.ATPAds = function(runtime) {
          */
         function Acts() {};
 
-
         Acts.prototype.ShowBanner = function() {
-            this.banner.show();
+            self.banner.show();
         };
         Acts.prototype.HideBanner = function() {
-            this.banner.hide();
+            self.banner.hide();
         };        
         Acts.prototype.LoadBanner = function() {
-            this.banner.load();
+            self.banner.load();
         };
         Acts.prototype.SetLayout = function(layout) {
-            this.banner.setLayout(layout);
+            self.banner.setLayout(layout);
         };
         Acts.prototype.SetPosition = function(x,y) {
-            this.banner.setPosition(x,y);
+            self.banner.setPosition(x,y);
         };
         Acts.prototype.ShowInterstitial = function() {
-            this.interstitial.show(); 
+            self.interstitial.show(); 
         };
         Acts.prototype.LoadInterstitial = function() {
-            this.interstitial.load();
+            self.interstitial.load();
         };
 
         pluginProto.acts = new Acts();
