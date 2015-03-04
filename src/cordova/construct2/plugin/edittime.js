@@ -9,7 +9,8 @@ function GetPluginSettings() {
         "category": "Platform specific",
         "type": "object", // not in layout
         "rotatable": false,
-        "flags": pf_singleglobal
+        "flags": pf_singleglobal,
+        "dependency": "cocoon.js;cocoon_ads.js"
     };
 };
 
@@ -47,28 +48,6 @@ AddCondition(10, cf_trigger, "On interstitial dismissed", "Interstitials", "On i
 
 // Banners
 
-// Create
-/*
-AddStringParam("AdUnit", "The banner adunit.");
-AddComboParamOption("SMART");
-AddComboParamOption("BANNER");
-AddComboParamOption("MEDIUM_RECT");
-AddComboParamOption("LEADERBOARD");
-AddComboParam("Size", "Choose the size you desire for the banner ad.");
-AddAction(0, 0, "Create banner (AdUnit + Size)", "Banners", "Create banner (AdUnit + Size)", "Create a banner ad given the id{0} and the size{1}.", "CreateBannerFull");
-
-AddComboParamOption("SMART");
-AddComboParamOption("BANNER");
-AddComboParamOption("MEDIUM_RECT");
-AddComboParamOption("LEADERBOARD");
-AddComboParam("Size", "Choose the size you desire for the banner ad.");
-AddAction(1, 0, "Create banner (Size)", "Banners", "Create banner (Size)", "Create a banner ad given the size.", "CreateBannerSize");
-
-AddStringParam("AdUnit", "The banner adunit.");
-AddAction(2, 0, "Create banner (AdUnit)", "Banners", "Create banner (AdUnit)", "Create a banner ad given the AdUnit.", "CreateBannerAdUnit");
-
-AddAction(3, 0, "Create banner (Default)", "Banners", "Create banner (Default)", "Create a banner using the default settings.", "CreateBannerDefault");
-*/
 // Layout 
 AddComboParamOption("TOP_CENTER");
 AddComboParamOption("BOTTOM_CENTER");
@@ -90,26 +69,13 @@ AddAction(7, 0, "Hide banner", "Banners", "Hide the banner ad", "Hide any curren
 // Load 
 AddAction(8, 0, "Load banner", "Banners", "Load a banner ad", "Start loading a banner ad in the background.", "LoadBanner");
 
-// Release 
-//AddAction(9, 0, "Release banner", "Banners", "Release a banner ad", "Release a banner ad.", "ReleaseBanner");
-
 // Interstitials
 
-// Create
-/*
-AddStringParam("AdUnit", "The interstitial adunit.");
-AddAction(10, 0, "Create interstitial (AdUnit)", "Interstitials", "Create interstitial (AdUnit)", "Create an interstitial ad given the AdUnit.", "CreateInterstitialAdUnit");
-
-AddAction(11, 0, "Create interstitial (Default)", "Interstitials", "Create interstitial (Default)", "Create an interstitial using the default settings.", "CreateInterstitialDefault");
-*/
 // Show
 AddAction(12, 0, "Show interstitial", "Interstitials", "Show the banner ad", "Show a banner ad on the screen while the game is running.", "ShowInterstitial");
 
 //Load 
 AddAction(13, 0, "Load interstitial", "Interstitials", "Load a banner ad", "Start loading an interstitial in the background.", "LoadInterstitial");
-
-// Release 
-//AddAction(14, 0, "Release interstitial", "Interstitials", "Release a banner ad", "Release an interstitial.", "ReleaseInterstitial");
 
 ACESDone();
 
@@ -119,12 +85,14 @@ ACESDone();
 
 var property_list = [
     new cr.Property(ept_section, "Android", "", "Ad unit IDs for Android."),
-    new cr.Property(ept_text,   "Banner ID (Android)",      "",         "Ad unit ID from admob or mopub for the banner ad."),
+    new cr.Property(ept_text,   "Banner ID (Android)",  "", "Ad unit ID from admob or mopub for the banner ad."),
+    new cr.Property(ept_combo,  "Banner size (Android)",    "SMART",    "The size of the banner ad to display", "SMART|BANNER|MEDIUM_RECT|LEADERBOARD"),
     new cr.Property(ept_text,   "Interstitial ID (Android)", "",        "Ad unit ID from admob or mopub for the interstitials."),
     
     new cr.Property(ept_section, "iOS", "", "Ad unit IDs for iOS."),
-    new cr.Property(ept_text,   "Banner ID (iOS)",          "",         "Ad unit ID admob or mopub for the banner ad."),
-    new cr.Property(ept_text,   "Interstitial ID (iOS)",    "",         "Ad unit ID admob or mopub for the interstitials.")
+    new cr.Property(ept_text,   "Banner ID (iOS)",  "", "Ad unit ID admob or mopub for the banner ad."),
+    new cr.Property(ept_combo,  "Banner size (iOS)",    "SMART",    "The size of the banner ad to display", "SMART|BANNER|MEDIUM_RECT|LEADERBOARD"),
+    new cr.Property(ept_text,   "Interstitial ID (iOS)",    "", "Ad unit ID admob or mopub for the interstitials.")
 ];
 
 // Called by IDE when a new object type is to be created
