@@ -69,8 +69,11 @@ cr.plugins_.ATPAds = function(runtime) {
                 }
 
                 this.banner = Cocoon.Ad.createBanner(this.bannerAdunit, this.bannerSize);
-                this.interstitial = Cocoon.Ad.creaInterstitial(this.interstitialAdunit);
 
+                this.interstitial = Cocoon.Ad.createInterstitial(this.interstitialAdunit);
+
+                self = this;
+                
                 this.banner.on("show", function() {
                     self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.OnBannerShown, self);
                 });
