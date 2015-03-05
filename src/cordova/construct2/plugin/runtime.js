@@ -4,10 +4,14 @@
 cr.plugins_.ATPAds = function(runtime) {
     this.runtime = runtime;
 };
+
 /**
  * C2 plugin
  */
 (function() {
+        var showBanner = false;
+        var bannerReady = false;
+        var interstitialReady = false;    
         var pluginProto = cr.plugins_.ATPAds.prototype;
         pluginProto.Type = function(plugin) {
             this.plugin = plugin;
@@ -15,6 +19,7 @@ cr.plugins_.ATPAds = function(runtime) {
         };
         var typeProto = pluginProto.Type.prototype;
         typeProto.onCreate = function() {};
+
         /**
          * C2 specific behaviour
          */
@@ -26,6 +31,8 @@ cr.plugins_.ATPAds = function(runtime) {
         var self;
         
         instanceProto.onCreate = function() {
+                this.isShowingBanner = false;
+                this.isShowingInterstitial = false;
 
                 this.androidBannerId = this.properties[0];
                 
@@ -74,17 +81,19 @@ cr.plugins_.ATPAds = function(runtime) {
 
                 self = this;
                 
+                // banner events
                 this.banner.on("show", function() {
+                    self.isShowingBanner = true;
                     self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onBannerShown, self);
                 });
 
                 this.banner.on("load", function() {
-                    console.log("loaded");
-                    self.banner.show();
+                    bannerReady = true;
                     self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onBannerLoaded, self);
                 });
 
                 this.banner.on("hide", function() {
+                    self.isShowingBanner = false;
                     self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onBannerHidden, self);
                 });
 
@@ -93,6 +102,7 @@ cr.plugins_.ATPAds = function(runtime) {
                 });
 
                 this.banner.on("fail", function() {
+                    bannerReady = false;
                     self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onBannerFailed, self);
                 });
 
@@ -100,10 +110,13 @@ cr.plugins_.ATPAds = function(runtime) {
                     self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onBannerDismissed, self);
                 });
 
+                // interstitial events
                 this.interstitial.on("show", function() {
+                    self.isShowingInterstitial = true;     
                     self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onInterstitialShown, self);
                 });
                 this.interstitial.on("load", function() {
+                    interstitialReady = true;                      
                     self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onInterstitialLoaded, self);
                 });
 
@@ -111,7 +124,14 @@ cr.plugins_.ATPAds = function(runtime) {
                     self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onInterstitialClicked, self);
                 });
 
+                this.interstitial.on("fail", function() {
+                    interstitialReady = false;   
+                    self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onInterstitialFailed, self);
+                });                
+
                 this.interstitial.on("dismiss", function() {
+                    self.isShowingInterstitial = false;
+                    interstitialReady = false;
                     self.runtime.trigger(cr.plugins_.ATPAds.prototype.cnds.onInterstitialDismissed, self);
                 });
         };
@@ -158,13 +178,20 @@ cr.plugins_.ATPAds = function(runtime) {
         function Acts() {};
 
         Acts.prototype.ShowBanner = function() {
-            self.banner.show();
+            if(bannerReady)
+                showBanner = true;
+                self.banner.show();
+            else 
+                self.banner.load();
         };
         Acts.prototype.HideBanner = function() {
-            self.banner.hide();
+            if(self.isShowingBanner)
+                showBanner = false;
+                self.banner.hide();
         };        
         Acts.prototype.LoadBanner = function() {
-            self.banner.load();
+            if(!bannerReady)
+                self.banner.load();
         };
         Acts.prototype.SetLayout = function(layout) {
             self.banner.setLayout(layout);
@@ -173,10 +200,14 @@ cr.plugins_.ATPAds = function(runtime) {
             self.banner.setPosition(x,y);
         };
         Acts.prototype.ShowInterstitial = function() {
-            self.interstitial.show(); 
+            if(interstitialReady)
+                self.interstitial.show(); 
+            else 
+                self.interstitial.load();
         };
         Acts.prototype.LoadInterstitial = function() {
-            self.interstitial.load();
+            if(!interstitialReady)
+                self.interstitial.load();
         };
 
         pluginProto.acts = new Acts();
